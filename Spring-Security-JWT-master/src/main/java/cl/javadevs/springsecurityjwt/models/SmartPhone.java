@@ -16,5 +16,6 @@ public class SmartPhone {
     @Column(name = "id_smartphone")
     private Long idSmartPhone;
     private String marca;
-    private Long precio;
+    private String modelo;
+    private Double precio;
 }

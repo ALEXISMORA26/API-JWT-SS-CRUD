@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cl.javadevs</groupId>
-    <artifactId>Spring-Security-JWT</artifactId>
+    |
     <version>0.0.1-SNAPSHOT</version>
     <name>Spring-Security-JWT-V2</name>
     <description>Spring-Security-JWT</description>

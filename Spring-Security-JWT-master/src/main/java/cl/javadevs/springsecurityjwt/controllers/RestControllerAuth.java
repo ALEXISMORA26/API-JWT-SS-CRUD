@@ -16,15 +16,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth/")
+@CrossOrigin(value = "http://localhost:3000/")
 public class RestControllerAuth {
     private AuthenticationManager authenticationManager;
     private PasswordEncoder passwordEncoder;
@@ -42,7 +40,7 @@ public class RestControllerAuth {
         this.jwtGenerador = jwtGenerador;
     }
     //Método para poder registrar usuarios con role "user"
-    @PostMapping("register")
+    @PostMapping(value = "register", headers = "Accept=application/json")
     public ResponseEntity<String> registrar(@RequestBody DtoRegistro dtoRegistro) {
         if (usuariosRepository.existsByUsername(dtoRegistro.getUsername())) {
             return new ResponseEntity<>("el usuario ya existe, intenta con otro", HttpStatus.BAD_REQUEST);
@@ -57,7 +55,7 @@ public class RestControllerAuth {
     }
 
     //Método para poder guardar usuarios de tipo ADMIN
-    @PostMapping("registerAdm")
+    @PostMapping(value = "registerAdm", headers = "Accept=application/json")
     public ResponseEntity<String> registrarAdmin(@RequestBody DtoRegistro dtoRegistro) {
         if (usuariosRepository.existsByUsername(dtoRegistro.getUsername())) {
             return new ResponseEntity<>("el usuario ya existe, intenta con otro", HttpStatus.BAD_REQUEST);
@@ -72,7 +70,7 @@ public class RestControllerAuth {
     }
 
     //Método para poder logear un usuario y obtener un token
-    @PostMapping("login")
+    @PostMapping(value = "login", headers = "Accept=application/json")
     public ResponseEntity<DtoAuthRespuesta> login(@RequestBody DtoLogin dtoLogin) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 dtoLogin.getUsername(), dtoLogin.getPassword()));

@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/celular/")
+@CrossOrigin(value = "http://localhost:3000/")
 public class RestControllerSmartPhone {
     private SmartPhoneService phoneService;
 
@@ -19,7 +20,7 @@ public class RestControllerSmartPhone {
     }
 
     //Petición para crear un  celular
-    @PostMapping(value = "crear", headers = "Accept=application/json")
+    @PostMapping("crear")
     public void crearCelular(@RequestBody SmartPhone smartPhone) {
         phoneService.crear(smartPhone);
     }
@@ -37,7 +38,7 @@ public class RestControllerSmartPhone {
     }
 
     //Petición para actualizar un celular
-    @PutMapping(value = "actualizar", headers = "Accept=application/json")
+    @PutMapping("actualizar")
     public void actualizarCelular(@RequestBody SmartPhone smartPhone) {
         phoneService.update(smartPhone);
     }
